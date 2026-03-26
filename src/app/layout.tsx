@@ -8,8 +8,8 @@ import ChatWidget from "@/components/features/ChatWidget";
 import AppContent from "./AppContent";
 
 export const metadata: Metadata = {
-  title: "BASE | E-commerce & Digital Studio",
-  description: "Menos, pero con intención. Premium e-commerce y servicios de desarrollo digital.",
+  title: "BASE | Diseño de Moda & Marketplace Premium",
+  description: "Moda con intención. Piezas de diseño premium seleccionadas con propósito y estética atemporal.",
 };
 
 export default function RootLayout({

@@ -7,9 +7,9 @@ import styles from './Header.module.css';
 
 const navLinks = [
   { href: '/marketplace?category=moda', label: 'Moda' },
+  { href: '/marketplace?category=accesorios', label: 'Accesorios' },
   { href: '/marketplace', label: 'Marketplace' },
-  { href: '/studio/servicios', label: 'Studio' },
-  { href: '/dashboard', label: 'Contacto' },
+  { href: '#contacto', label: 'Contacto' },
 ];
 
 export default function Header() {

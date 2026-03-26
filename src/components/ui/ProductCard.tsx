@@ -42,27 +42,130 @@ export default function ProductCard({ product }: ProductCardProps) {
     addNotification({ type: 'success', message: `${product.title} añadido al carrito` });
   };
 
-  const isNew   = product.condition === 'new';
-  const tagLabel = isNew ? 'Nuevo' : product.condition === 'used' ? 'Usado' : 'Reacondicionado';
+  const isNew = product.condition === 'new';
+  const tagLabel = isNew ? 'NEW' : product.condition === 'used' ? 'PRE-OWNED' : 'REFURBISHED';
 
   return (
-    <Link href={`/marketplace/producto/${product.id}`} className="home-product-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-      <div className="product-image">
-        <div className="product-image-inner" style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-          <img
-            src={getImg(product)}
-            alt={product.title}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)' }}
-          />
+    <>
+      <style jsx>{`
+        .premium-card {
+          display: block;
+          text-decoration: none;
+          color: #050505;
+          position: relative;
+          width: 100%;
+          cursor: pointer;
+        }
+
+        .card-image-wrapper {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 3 / 4;
+          overflow: hidden;
+          background: #f2f2f2;
+          margin-bottom: 1rem;
+        }
+
+        .card-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .premium-card:hover .card-img {
+          transform: scale(1.05);
+        }
+
+        .card-tag {
+          position: absolute;
+          top: 1rem;
+          left: 1rem;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          padding: 0.3rem 0.6rem;
+          background: #fff;
+          color: #000;
+          z-index: 10;
+        }
+
+        .card-quick-add {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 1rem;
+          background: rgba(255, 255, 255, 0.95);
+          color: #000;
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-align: center;
+          text-transform: uppercase;
+          transform: translateY(100%);
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          border-top: 1px solid rgba(0,0,0,0.05);
+          z-index: 15;
+        }
+
+        .premium-card:hover .card-quick-add {
+          transform: translateY(0);
+        }
+
+        .card-quick-add:hover {
+          background: #000;
+          color: #fff;
+        }
+
+        .card-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+        }
+
+        .card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .card-title {
+          font-size: 1rem;
+          font-weight: 400;
+          margin: 0;
+          line-height: 1.4;
+          letter-spacing: -0.01em;
+        }
+
+        .card-price {
+          font-size: 1rem;
+          font-weight: 500;
+          white-space: nowrap;
+        }
+
+        .card-category {
+          font-size: 0.8rem;
+          color: #737373;
+          text-transform: capitalize;
+        }
+      `}</style>
+
+      <Link href={`/marketplace/producto/${product.id}`} className="premium-card">
+        <div className="card-image-wrapper">
+          <img src={getImg(product)} alt={product.title} className="card-img" />
+          <div className="card-tag">{tagLabel}</div>
+          <div className="card-quick-add" onClick={handleAddToCart}>Agregar al Carrito</div>
         </div>
-        <div className="product-tag">{tagLabel}</div>
-        <div className="product-action" onClick={handleAddToCart}>Agregar al carrito</div>
-      </div>
-      <div className="product-info">
-        <div className="product-category">{product.subcategory}</div>
-        <div className="product-name">{product.title}</div>
-        <div className="product-price">${product.price.toLocaleString('es-AR')}</div>
-      </div>
-    </Link>
+        <div className="card-info">
+          <div className="card-header">
+            <h3 className="card-title">{product.title}</h3>
+            <div className="card-price">${product.price.toLocaleString('es-AR')}</div>
+          </div>
+          <div className="card-category">{product.subcategory || product.category}</div>
+        </div>
+      </Link>
+    </>
   );
 }

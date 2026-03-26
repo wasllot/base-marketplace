@@ -1,0 +1,139 @@
+{
+  "hero": {
+    "tag": "Marca de Diseño de Moda · Marketplace Premium",
+    "titleLine1": "Moda con",
+    "titleLine2": "propósito,",
+    "titleLine3": "siempre.",
+    "description": "Piezas de moda seleccionadas con intención. BASE es diseño, identidad y presencia atemporal.",
+    "cta1Text": "Explorar Colección",
+    "cta1Url": "/marketplace",
+    "cta2Text": "Ver Accesorios",
+    "cta2Url": "/marketplace?category=accesorios",
+    "heroImage": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80"
+  },
+  "marquee": {
+    "items": [
+      "Moda Premium",
+      "Diseño Atemporal",
+      "Piezas Esenciales",
+      "Accesorios",
+      "Colección",
+      "Estilo",
+      "Minimalismo",
+      "Calidad"
+    ]
+  },
+  "platforms": {
+    "sectionLabel": "Nuestro Mundo",
+    "titleLine1": "Una marca,",
+    "titleBold": "una visión.",
+    "cards": [
+      {
+        "id": "moda",
+        "number": "01",
+        "title": "Moda",
+        "description": "Prendas seleccionadas con intención. Jackets, hoodies, pantalones y básicos premium de temporada.",
+        "linkText": "Ver moda",
+        "linkUrl": "/marketplace?category=moda",
+        "icon": "heart"
+      },
+      {
+        "id": "accesorios",
+        "number": "02",
+        "title": "Accesorios",
+        "description": "Bolsos, gorros, cinturones y complementos para completar cada look con precisión y carácter.",
+        "linkText": "Ver accesorios",
+        "linkUrl": "/marketplace?category=accesorios",
+        "icon": "bag"
+      },
+      {
+        "id": "marketplace",
+        "number": "03",
+        "title": "Marketplace",
+        "description": "Toda la colección BASE en un solo lugar. Encuentra tu pieza esencial con búsqueda y filtros avanzados.",
+        "linkText": "Explorar todo",
+        "linkUrl": "/marketplace",
+        "icon": "grid"
+      }
+    ]
+  },
+  "editorial": {
+    "sectionLabel": "Identidad BASE",
+    "titleLine1": "Diseño desde",
+    "titleBold": "el origen.",
+    "description": "Cada prenda BASE nace de un proceso de diseño riguroso. Materiales seleccionados, siluetas estudiadas, estética atemporal. Moda que trasciende la temporada.",
+    "ctaText": "Ver Colección Completa",
+    "ctaUrl": "/marketplace",
+    "categories": [
+      "Jackets & Abrigos",
+      "Accesorios Esenciales",
+      "Basics Premium",
+      "Prendas de Temporada",
+      "Edición Limitada"
+    ]
+  },
+  "values": {
+    "sectionLabel": "Identidad",
+    "titleLine1": "Lo que",
+    "titleBold": "nos define.",
+    "items": [
+      {
+        "number": "01",
+        "title": "Simplicidad",
+        "description": "Eliminamos lo innecesario. Cada elemento tiene propósito. Cada decisión, intención."
+      },
+      {
+        "number": "02",
+        "title": "Calidad",
+        "description": "Materiales, tejidos y diseño de alto estándar. No hacemos concesiones en lo que entregamos."
+      },
+      {
+        "number": "03",
+        "title": "Atemporalidad",
+        "description": "Piezas que trascienden tendencias. Diseñamos para durar, no para un momento efímero."
+      },
+      {
+        "number": "04",
+        "title": "Confianza",
+        "description": "BASE es fundamento. Construimos relaciones sólidas con cada cliente y cada prenda."
+      }
+    ]
+  },
+  "cta": {
+    "titleLine1": "¿Listo para",
+    "titleBold": "tu estilo?",
+    "subtitle": "Explora nuestra colección completa o síguenos en redes para las últimas novedades.",
+    "btn1Text": "Explorar Marketplace",
+    "btn1Url": "/marketplace",
+    "btn2Text": "Ver Accesorios",
+    "btn2Url": "/marketplace?category=accesorios"
+  },
+  "footer": {
+    "tagline": "Moda con intención.\n\nDiseño de moda premium y marketplace de piezas esenciales.",
+    "socials": [
+      "Instagram",
+      "TikTok",
+      "Pinterest"
+    ]
+  },
+  "nav": {
+    "links": [
+      {
+        "label": "Moda",
+        "url": "/marketplace?category=moda"
+      },
+      {
+        "label": "Accesorios",
+        "url": "/marketplace?category=accesorios"
+      },
+      {
+        "label": "Marketplace",
+        "url": "/marketplace"
+      },
+      {
+        "label": "Contacto",
+        "url": "#contacto"
+      }
+    ]
+  }
+}
