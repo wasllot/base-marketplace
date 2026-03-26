@@ -2,33 +2,45 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Product } from '@/lib/api/types';
 import { useCart } from '@/lib/context/CartContext';
 import { useNotification } from '@/lib/context/NotificationContext';
 
-const FALLBACK_IMGS: Record<string, string> = {
-  'local-1': 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80',
-  'local-2': 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80',
-  'local-3': 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&q=80',
-  'local-4': 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&q=80',
-  'local-5': 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80',
-  'local-6': 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&q=80',
-  'local-7': 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80',
-  'local-8': 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&q=80',
-  'local-9': 'https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=600&q=80',
-  'local-10':'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80',
-  'local-11':'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=600&q=80',
-  'local-12':'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80',
-};
+export interface ApiProduct {
+  id: number | string;
+  name?: string;
+  title?: string;
+  price: number | string;
+  original_price?: number;
+  description?: string;
+  image?: string;
+  images?: string[] | { url: string }[];
+  category?: { id: number | string; name: string } | string;
+  stock?: number;
+  is_featured?: boolean;
+  slug?: string;
+}
 
-function getImg(product: Product): string {
-  return FALLBACK_IMGS[product.id] ??
-    product.images?.[0] ??
-    'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=80';
+const FALLBACK_IMG = 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=80';
+
+function getImg(p: ApiProduct): string {
+  if (p.image) return p.image;
+  const imgs = p.images;
+  if (Array.isArray(imgs) && imgs.length > 0) {
+    const first = imgs[0];
+    if (typeof first === 'string') return first;
+    if (typeof first === 'object' && 'url' in first) return (first as { url: string }).url;
+  }
+  return FALLBACK_IMG;
+}
+
+function getCatName(p: ApiProduct): string {
+  if (!p.category) return '';
+  if (typeof p.category === 'string') return p.category;
+  return (p.category as { name: string }).name;
 }
 
 interface ProductCardProps {
-  product: Product;
+  product: ApiProduct;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
@@ -38,12 +50,15 @@ export default function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addItem(product);
-    addNotification({ type: 'success', message: `${product.title} añadido al carrito` });
+    // Use CartContext for now, adapting to API structure
+    addItem(product as any);
+    addNotification({ type: 'success', message: `${product.name ?? product.title} añadido al carrito` });
   };
 
-  const isNew = product.condition === 'new';
-  const tagLabel = isNew ? 'NEW' : product.condition === 'used' ? 'PRE-OWNED' : 'REFURBISHED';
+  const origPrice = product.original_price ? Number(product.original_price) : null;
+  const price = Number(product.price);
+  const tagLabel = origPrice && origPrice > price ? 'SALE' : (product.stock ?? 999) < 10 ? 'LIMITED' : 'NEW';
+
 
   return (
     <>
@@ -154,16 +169,16 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       <Link href={`/marketplace/producto/${product.id}`} className="premium-card">
         <div className="card-image-wrapper">
-          <img src={getImg(product)} alt={product.title} className="card-img" />
+          <img src={getImg(product)} alt={product.name ?? product.title ?? ''} className="card-img" />
           <div className="card-tag">{tagLabel}</div>
           <div className="card-quick-add" onClick={handleAddToCart}>Agregar al Carrito</div>
         </div>
         <div className="card-info">
           <div className="card-header">
-            <h3 className="card-title">{product.title}</h3>
-            <div className="card-price">${product.price.toLocaleString('es-AR')}</div>
+            <h3 className="card-title">{product.name ?? product.title}</h3>
+            <div className="card-price">${price.toLocaleString('es-AR')}</div>
           </div>
-          <div className="card-category">{product.subcategory || product.category}</div>
+          <div className="card-category">{getCatName(product)}</div>
         </div>
       </Link>
     </>

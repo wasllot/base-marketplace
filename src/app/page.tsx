@@ -2,12 +2,13 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import { Product } from '@/lib/api/types';
-import ProductCard from '@/components/ui/ProductCard';
+import { apiFetch } from '@/lib/api/apiClient';
+import { API } from '@/lib/api/endpoints';
+import ProductCard, { ApiProduct } from '@/components/ui/ProductCard';
 
 export default function Home() {
   const [loaderDone, setLoaderDone] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ApiProduct[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [content, setContent] = useState<any>(null);
 
@@ -95,12 +96,13 @@ export default function Home() {
       .then(data => setContent(data))
       .catch(() => {});
       
-    // Fetch products
-    fetch('/api/products')
-      .then(res => res.json())
+    // Fetch products from live API
+    apiFetch<{ data: ApiProduct[] } | ApiProduct[]>(API.PRODUCTS)
       .then(data => {
-        const prodList = Array.isArray(data) ? data : data.data || [];
-        setProducts(prodList.slice(0, 8)); // Get top 8
+        const prodList = Array.isArray(data) ? data : (data as { data: ApiProduct[] }).data || [];
+        // Show featured products first in the slider, up to 8 items
+        const featured = [...prodList].sort((a,b) => (b.is_featured?1:0) - (a.is_featured?1:0)).slice(0, 8);
+        setProducts(featured);
       })
       .catch(() => {});
   }, []);
