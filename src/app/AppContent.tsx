@@ -7,6 +7,9 @@ import Footer from '@/components/layout/Footer';
 export default function AppContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const isAdmin = pathname.startsWith('/admin');
+
+  if (isAdmin) return <>{children}</>;
 
   return (
     <>

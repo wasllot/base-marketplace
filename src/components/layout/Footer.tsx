@@ -8,24 +8,15 @@ export default function Footer() {
         <div className="footer-top-global">
           <div>
             <div className="footer-brand-logo-global">BASE</div>
-            <p className="footer-brand-tagline-global">Menos, pero con intención.<br /><br />E-commerce premium y desarrollo digital de alta calidad.</p>
+            <p className="footer-brand-tagline-global">Moda con intención.<br /><br />Diseño de moda premium y marketplace de piezas esenciales.</p>
           </div>
           <div>
-            <div className="footer-col-title-global">Shop</div>
+            <div className="footer-col-title-global">Colección</div>
             <ul className="footer-links-global">
-              <li><Link href="/marketplace">Moda</Link></li>
-              <li><Link href="/marketplace">Accesorios</Link></li>
+              <li><Link href="/marketplace?category=moda">Moda</Link></li>
+              <li><Link href="/marketplace?category=accesorios">Accesorios</Link></li>
               <li><Link href="/marketplace">Todos los productos</Link></li>
               <li><Link href="/marketplace">Destacados</Link></li>
-            </ul>
-          </div>
-          <div>
-            <div className="footer-col-title-global">Studio</div>
-            <ul className="footer-links-global">
-              <li><Link href="/studio/servicios">Servicios</Link></li>
-              <li><Link href="/studio/servicios">Desarrollo Full Stack</Link></li>
-              <li><Link href="/studio/servicios">Diseño UI/UX</Link></li>
-              <li><Link href="/studio/servicios">Branding</Link></li>
             </ul>
           </div>
           <div>
@@ -33,7 +24,7 @@ export default function Footer() {
             <ul className="footer-links-global">
               <li><Link href="/dashboard">Mi cuenta</Link></li>
               <li><Link href="/carrito">Carrito</Link></li>
-              <li><Link href="/contacto">Contacto</Link></li>
+              <li><Link href="#contacto">Contacto</Link></li>
             </ul>
           </div>
         </div>
@@ -42,7 +33,7 @@ export default function Footer() {
           <ul className="footer-socials-global">
             <li><a href="#">Instagram</a></li>
             <li><a href="#">TikTok</a></li>
-            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Pinterest</a></li>
           </ul>
         </div>
       </footer>
@@ -56,7 +47,7 @@ export default function Footer() {
 
         .footer-top-global {
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1fr;
+          grid-template-columns: 2fr 1fr 1fr;
           gap: 4rem;
           padding-bottom: 4rem;
           border-bottom: 1px solid rgba(255,255,255,0.08);

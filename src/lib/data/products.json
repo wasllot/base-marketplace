@@ -29,7 +29,7 @@
       "price": 129.99,
       "currency": "USD",
       "condition": "new",
-      "brand": "BASE Studio",
+      "brand": "BASE Essentials",
       "category": "moda",
       "subcategory": "camisas",
       "images": [
@@ -154,7 +154,7 @@
       "price": 119.99,
       "currency": "USD",
       "condition": "new",
-      "brand": "BASE Studio",
+      "brand": "BASE Essentials",
       "category": "moda",
       "subcategory": "sudaderas",
       "images": [
@@ -263,21 +263,11 @@
       "id": "accesorios",
       "name": "Accesorios",
       "subcategories": ["bolsos", "gorras", "relojes", "cinturones", "gafas"]
-    },
-    {
-      "id": "tecnologia",
-      "name": "Tecnología",
-      "subcategories": ["audifonos", "smartwatches", "accesorios-moviles"]
-    },
-    {
-      "id": "hogar",
-      "name": "Hogar",
-      "subcategories": ["decoracion", "iluminacion", "textiles"]
     }
   ],
   "brands": [
     "BASE Original",
-    "BASE Studio",
+    "BASE Essentials",
     "BASE Footwear",
     "BASE Accessories",
     "BASE Time"
@@ -287,29 +277,7 @@
     { "id": "used", "label": "Usado" },
     { "id": "refurbished", "label": "Reacondicionado" }
   ],
-  "services": [
-    {
-      "id": "fullstack",
-      "title": "Desarrollo Full Stack",
-      "description": "Soluciones end-to-end con tecnologías modernas. Frontend y backend integrados perfectamente.",
-      "features": ["Next.js & React", "Node.js APIs", "Bases de datos", "Despliegue cloud"],
-      "price": "Desde $2,500"
-    },
-    {
-      "id": "uiux",
-      "title": "Diseño UI/UX",
-      "description": "Diseño de interfaces que equilibran estética y funcionalidad para experiencias memorables.",
-      "features": ["Diseño de sistemas", "Prototipado", "Research de usuarios", "Accesibilidad WCAG"],
-      "price": "Desde $1,500"
-    },
-    {
-      "id": "optimization",
-      "title": "Optimización de Sistemas",
-      "description": "Mejora el rendimiento de tus aplicaciones existentes. Código más rápido y eficiente.",
-      "features": ["Auditoría de performance", "Optimización de DB", "Caching strategies", "Code review"],
-      "price": "Desde $800"
-    }
-  ],
+
   "orders": [
     {
       "id": "ORD-001",

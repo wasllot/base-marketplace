@@ -125,7 +125,7 @@ export async function deleteProduct(id: string): Promise<void> {
 const categories: Category[] = localData.categories as Category[];
 const brands: Brand[] = (localData.brands as string[]).map((name, i) => ({ id: `brand-${i}`, name }));
 const conditions: Condition[] = localData.conditions;
-const services: Service[] = localData.services as Service[];
+const services: Service[] = [];
 
 export async function getCategories() {
   // Enrich with product counts
