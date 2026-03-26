@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/lib/context/CartContext";
 import { NotificationProvider } from "@/lib/context/NotificationContext";
+import { AuthProvider } from "@/lib/context/AuthContext";
 import ToastNotifications from "@/components/features/ToastNotifications";
 import CartSidebar from "@/components/features/CartSidebar";
 import ChatWidget from "@/components/features/ChatWidget";
@@ -20,14 +21,16 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body suppressHydrationWarning>
-        <CartProvider>
-          <NotificationProvider>
-            <AppContent>{children}</AppContent>
-            <ToastNotifications />
-            <CartSidebar />
-            <ChatWidget />
-          </NotificationProvider>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <NotificationProvider>
+              <AppContent>{children}</AppContent>
+              <ToastNotifications />
+              <CartSidebar />
+              <ChatWidget />
+            </NotificationProvider>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -8,8 +8,9 @@ export default function AppContent({ children }: { children: React.ReactNode }) 
   const pathname = usePathname();
   const isHome = pathname === '/';
   const isAdmin = pathname.startsWith('/admin');
+  const isCuenta = pathname.startsWith('/cuenta');
 
-  if (isAdmin) return <>{children}</>;
+  if (isAdmin || isCuenta) return <>{children}</>;
 
   return (
     <>

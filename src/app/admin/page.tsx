@@ -2,28 +2,52 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { apiFetch, setToken } from '@/lib/api/apiClient';
+import { API } from '@/lib/api/endpoints';
 
-const ADMIN_PASSWORD = 'base2026';
+const ADMIN_PASSWORD = 'base2026'; // legacy local fallback
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [mode, setMode] = useState<'api' | 'local'>('api');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    setTimeout(() => {
-      if (password === ADMIN_PASSWORD) {
-        localStorage.setItem('base_admin_auth', 'true');
-        router.replace('/admin/contenido');
-      } else {
-        setError('Contraseña incorrecta.');
-        setLoading(false);
-      }
-    }, 500);
+
+    if (mode === 'local') {
+      // Legacy local password
+      setTimeout(() => {
+        if (password === ADMIN_PASSWORD) {
+          localStorage.setItem('base_admin_auth', 'true');
+          router.replace('/admin/contenido');
+        } else {
+          setError('Contraseña incorrecta.');
+          setLoading(false);
+        }
+      }, 400);
+      return;
+    }
+
+    // Real API login
+    try {
+      const res = await apiFetch<{ access_token: string }>(API.LOGIN, {
+        method: 'POST',
+        body: { email, password },
+      });
+      setToken(res.access_token);
+      localStorage.setItem('base_admin_auth', 'true');
+      router.replace('/admin/catalogo');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Credenciales incorrectas.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -132,7 +156,39 @@ export default function AdminLoginPage() {
         <div className="login-logo">BASE</div>
         <div className="login-subtitle">Panel de Administración</div>
 
+        <div style={{ display: 'flex', gap: '.5rem', marginBottom: '2rem' }}>
+          <button
+            type="button"
+            onClick={() => setMode('api')}
+            style={{ flex: 1, padding: '.4rem', fontSize: '.6rem', fontWeight: 700, letterSpacing: '.1rem', textTransform: 'uppercase', background: mode === 'api' ? '#fff' : 'transparent', color: mode === 'api' ? '#000' : 'rgba(255,255,255,.4)', border: '1px solid rgba(255,255,255,.15)', cursor: 'pointer' }}
+          >
+            API Login
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode('local')}
+            style={{ flex: 1, padding: '.4rem', fontSize: '.6rem', fontWeight: 700, letterSpacing: '.1rem', textTransform: 'uppercase', background: mode === 'local' ? '#fff' : 'transparent', color: mode === 'local' ? '#000' : 'rgba(255,255,255,.4)', border: '1px solid rgba(255,255,255,.15)', cursor: 'pointer' }}
+          >
+            Local
+          </button>
+        </div>
+
         <form onSubmit={handleSubmit}>
+          {mode === 'api' && (
+            <>
+              <label className="login-label" htmlFor="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                className="login-input"
+                placeholder="admin@ejemplo.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+                autoFocus
+              />
+            </>
+          )}
           <label className="login-label" htmlFor="password">Contraseña</label>
           <input
             id="password"
@@ -141,7 +197,7 @@ export default function AdminLoginPage() {
             placeholder="········"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            autoFocus
+            autoFocus={mode === 'local'}
             required
           />
           <button type="submit" className="login-btn" disabled={loading}>
