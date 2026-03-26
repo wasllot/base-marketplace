@@ -1,0 +1,358 @@
+{
+  "products": [
+    {
+      "id": "local-1",
+      "title": "Chaqueta de Cuero Noir",
+      "description": "Chaqueta de cuero premium estilo bomber, corte ajustado. Piel de alta calidad con acabado matte. Ideal para cualquier estación.",
+      "price": 459.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Original",
+      "category": "moda",
+      "subcategory": "chaquetas",
+      "images": [
+        "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+        "https://images.unsplash.com/photo-1520975954732-35dd22299614?w=800"
+      ],
+      "stock": 15,
+      "sku": "CH-NOIR-001",
+      "attributes": {
+        "material": "Cuero 100%",
+        "color": "Negro",
+        "tallas": ["S", "M", "L", "XL"]
+      }
+    },
+    {
+      "id": "local-2",
+      "title": "Camisa Arquitectura White",
+      "description": "Camisa de manga larga con diseño arquitectónico. Algodón orgánico con estructura tejida única. Corte recto moderno.",
+      "price": 129.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Studio",
+      "category": "moda",
+      "subcategory": "camisas",
+      "images": [
+        "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800"
+      ],
+      "stock": 32,
+      "sku": "CM-ARC-WHT",
+      "attributes": {
+        "material": "Algodón orgánico",
+        "color": "Blanco",
+        "tallas": ["XS", "S", "M", "L", "XL"]
+      }
+    },
+    {
+      "id": "local-3",
+      "title": "Pantalón Minimalist Grey",
+      "description": "Pantalón de corte recto con líneas minimalistas. Tela premium con caída perfecta. Para uso formal o casual.",
+      "price": 189.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Original",
+      "category": "moda",
+      "subcategory": "pantalones",
+      "images": [
+        "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800"
+      ],
+      "stock": 28,
+      "sku": "PN-MIN-GRY",
+      "attributes": {
+        "material": "Mezclaalgodón",
+        "color": "Gris",
+        "tallas": ["28", "30", "32", "34", "36"]
+      }
+    },
+    {
+      "id": "local-4",
+      "title": "Zapatillas Urban Monochrome",
+      "description": "Zapatillas urbanas de diseño minimalista. Suela de caucho natural, upper de lona premium.",
+      "price": 159.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Footwear",
+      "category": "moda",
+      "subcategory": "zapatillas",
+      "images": [
+        "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800"
+      ],
+      "stock": 45,
+      "sku": "ZP-URB-MON",
+      "attributes": {
+        "material": "Lona + Caucho",
+        "color": "Blanco/Negro",
+        "tallas": ["40", "41", "42", "43", "44", "45"]
+      }
+    },
+    {
+      "id": "local-5",
+      "title": "Bolso Tote Architect",
+      "description": "Bolso tote de diseño arquitectónico. Cuero vegano de alta resistencia. Compartimento para laptop 15''.",
+      "price": 249.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Accessories",
+      "category": "accesorios",
+      "subcategory": "bolsos",
+      "images": [
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800"
+      ],
+      "stock": 20,
+      "sku": "BT-ARC-001",
+      "attributes": {
+        "material": "Cuero vegano",
+        "color": "Negro",
+        "dimensiones": "40x30x15cm"
+      }
+    },
+    {
+      "id": "local-6",
+      "title": "Gorra Structure Black",
+      "description": "Gorra snapback con diseño estructurado. Logotipo bordado premium. Ajuste universal.",
+      "price": 59.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Accessories",
+      "category": "accesorios",
+      "subcategory": "gorras",
+      "images": [
+        "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800"
+      ],
+      "stock": 60,
+      "sku": "GR-STR-BLK",
+      "attributes": {
+        "material": "Algodón",
+        "color": "Negro"
+      }
+    },
+    {
+      "id": "local-7",
+      "title": "Reloj Minimal Steel",
+      "description": "Reloj de diseño minimalista. Caja de acero inoxidable, movimiento quartz. Resistente al agua 50m.",
+      "price": 299.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Time",
+      "category": "accesorios",
+      "subcategory": "relojes",
+      "images": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800"
+      ],
+      "stock": 18,
+      "sku": "RL-MIN-STL",
+      "attributes": {
+        "material": "Acero inoxidable",
+        "color": "Plateado",
+      "movimiento": "Quartz"
+      }
+    },
+    {
+      "id": "local-8",
+      "title": "Sudadera Essential Grey",
+      "description": "Sudadera de capucha con diseño esencial. Algodón premium peinado. Bolsillo canguro integrado.",
+      "price": 119.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Studio",
+      "category": "moda",
+      "subcategory": "sudaderas",
+      "images": [
+        "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+      ],
+      "stock": 40,
+      "sku": "SD-ESS-GRY",
+      "attributes": {
+        "material": "Algodón premium",
+        "color": "Gris jaspe",
+        "tallas": ["S", "M", "L", "XL"]
+      }
+    },
+    {
+      "id": "local-9",
+      "title": "Cinturón Leather Slim",
+      "description": "Cinturón de cuero genuino, hebilla matte. Ancho 3.5cm. Acabado artesanal.",
+      "price": 89.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Accessories",
+      "category": "accesorios",
+      "subcategory": "cinturones",
+      "images": [
+        "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=800"
+      ],
+      "stock": 55,
+      "sku": "CT-LTH-SLM",
+      "attributes": {
+        "material": "Cuero genuino",
+        "color": "Marrón oscuro",
+        "ancho": "3.5cm"
+      }
+    },
+    {
+      "id": "local-10",
+      "title": "Vestido Geometry Black",
+      "description": "Vestido de diseño geométrico. Silueta estructurada con líneas arquitectónicas. Para ocasiones especiales.",
+      "price": 279.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Original",
+      "category": "moda",
+      "subcategory": "vestidos",
+      "images": [
+        "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800"
+      ],
+      "stock": 12,
+      "sku": "VS-GEO-BLK",
+      "attributes": {
+        "material": "Mezcla premium",
+        "color": "Negro",
+        "tallas": ["XS", "S", "M", "L"]
+      }
+    },
+    {
+      "id": "local-11",
+      "title": "Abrigo Wool Charcoal",
+      "description": "Abrigo de lana merino de corte clásico. Forro interior de seda. Botones escondidos.",
+      "price": 549.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Original",
+      "category": "moda",
+      "subcategory": "abrigos",
+      "images": [
+        "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800"
+      ],
+      "stock": 8,
+      "sku": "AB-WOOL-CHR",
+      "attributes": {
+        "material": "Lana merino",
+        "color": "Carbón",
+        "tallas": ["S", "M", "L", "XL"]
+      }
+    },
+    {
+      "id": "local-12",
+      "title": "Gafas de Sol Aviator Steel",
+      "description": "Gafas de sol estilo aviador. Lentes polarizadas UV400. Montura de acero quirúrgico.",
+      "price": 179.99,
+      "currency": "USD",
+      "condition": "new",
+      "brand": "BASE Accessories",
+      "category": "accesorios",
+      "subcategory": "gafas",
+      "images": [
+        "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800"
+      ],
+      "stock": 25,
+      "sku": "GS-AVI-STL",
+      "attributes": {
+        "material": "Acero quirúrgico",
+        "color": "Plateado",
+        "lentes": "Polarizadas UV400"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "moda",
+      "name": "Moda",
+      "subcategories": ["chaquetas", "camisas", "pantalones", "zapatillas", "sudaderas", "vestidos", "abrigos"]
+    },
+    {
+      "id": "accesorios",
+      "name": "Accesorios",
+      "subcategories": ["bolsos", "gorras", "relojes", "cinturones", "gafas"]
+    },
+    {
+      "id": "tecnologia",
+      "name": "Tecnología",
+      "subcategories": ["audifonos", "smartwatches", "accesorios-moviles"]
+    },
+    {
+      "id": "hogar",
+      "name": "Hogar",
+      "subcategories": ["decoracion", "iluminacion", "textiles"]
+    }
+  ],
+  "brands": [
+    "BASE Original",
+    "BASE Studio",
+    "BASE Footwear",
+    "BASE Accessories",
+    "BASE Time"
+  ],
+  "conditions": [
+    { "id": "new", "label": "Nuevo" },
+    { "id": "used", "label": "Usado" },
+    { "id": "refurbished", "label": "Reacondicionado" }
+  ],
+  "services": [
+    {
+      "id": "fullstack",
+      "title": "Desarrollo Full Stack",
+      "description": "Soluciones end-to-end con tecnologías modernas. Frontend y backend integrados perfectamente.",
+      "features": ["Next.js & React", "Node.js APIs", "Bases de datos", "Despliegue cloud"],
+      "price": "Desde $2,500"
+    },
+    {
+      "id": "uiux",
+      "title": "Diseño UI/UX",
+      "description": "Diseño de interfaces que equilibran estética y funcionalidad para experiencias memorables.",
+      "features": ["Diseño de sistemas", "Prototipado", "Research de usuarios", "Accesibilidad WCAG"],
+      "price": "Desde $1,500"
+    },
+    {
+      "id": "optimization",
+      "title": "Optimización de Sistemas",
+      "description": "Mejora el rendimiento de tus aplicaciones existentes. Código más rápido y eficiente.",
+      "features": ["Auditoría de performance", "Optimización de DB", "Caching strategies", "Code review"],
+      "price": "Desde $800"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-001",
+      "date": "2026-02-15",
+      "status": "delivered",
+      "items": [
+        { "productId": "local-1", "quantity": 1, "price": 459.99 }
+      ],
+      "total": 479.99,
+      "shipping": 20.00
+    },
+    {
+      "id": "ORD-002",
+      "date": "2026-02-18",
+      "status": "shipped",
+      "items": [
+        { "productId": "local-4", "quantity": 1, "price": 159.99 },
+        { "productId": "local-6", "quantity": 2, "price": 59.99 }
+      ],
+      "total": 279.97,
+      "shipping": 15.00
+    },
+    {
+      "id": "ORD-003",
+      "date": "2026-02-20",
+      "status": "processing",
+      "items": [
+        { "productId": "local-7", "quantity": 1, "price": 299.99 }
+      ],
+      "total": 314.99,
+      "shipping": 15.00
+    }
+  ],
+  "user": {
+    "id": "user-001",
+    "name": "Juan Pérez",
+    "email": "juan@example.com",
+    "phone": "+52 123 456 7890",
+    "address": {
+      "street": "Av. Principal 123",
+      "city": "Ciudad de México",
+      "state": "CDMX",
+      "zip": "01000"
+    }
+  }
+}

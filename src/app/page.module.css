@@ -1,141 +1,312 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
   min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  padding-top: var(--header-height);
 }
 
-.main {
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+/* Hero Section */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - var(--header-height));
+  position: relative;
+  overflow: hidden;
+}
+
+.heroContent {
   display: flex;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 800px;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  padding: var(--spacing-3xl);
+  background-color: var(--color-white);
+  position: relative;
+  z-index: 1;
+}
+
+.heroTitle {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  margin-bottom: var(--spacing-md);
+}
+
+.highlight {
+  color: var(--color-jet-black);
+  position: relative;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-color: var(--color-cement);
+  z-index: -1;
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-h3);
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: var(--spacing-xl);
+  max-width: 400px;
+}
+
+.heroCtas {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.primaryButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-jet-black);
+  color: var(--color-white);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+}
+
+.primaryButton:hover {
+  background-color: var(--color-charcoal);
+}
+
+.secondaryButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-white);
+  color: var(--color-jet-black);
+  border: 1px solid var(--color-jet-black);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+}
+
+.secondaryButton:hover {
+  background-color: var(--color-jet-black);
+  color: var(--color-white);
+}
+
+.heroVisual {
+  position: relative;
+  background-color: var(--color-off-white);
+  overflow: hidden;
+}
+
+.heroImageContainer {
+  position: absolute;
+  inset: 0;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.geometricShape1 {
+  position: absolute;
+  top: 20%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  border: 1px solid var(--color-jet-black);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.geometricShape2 {
+  position: absolute;
+  bottom: 10%;
+  left: -5%;
+  width: 200px;
+  height: 200px;
+  border: 1px solid var(--color-jet-black);
+  opacity: 0.3;
+  transform: rotate(45deg);
+}
+
+/* Features Section */
+.features {
+  padding: var(--spacing-4xl) 0;
+  background-color: var(--color-white);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xl);
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.featureCard {
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 0 var(--color-jet-black);
+}
+
+.featureIcon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.featureTitle {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xs);
+}
+
+.featureDescription {
+  font-size: var(--font-size-body);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Featured Products Section */
+.featured {
+  padding: var(--spacing-4xl) 0;
+  background-color: var(--color-off-white);
+}
+
+.sectionHeader {
+  display: flex;
   justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+.viewAll {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
 }
 
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
+.viewAll:hover {
+  text-decoration: underline;
 }
 
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
 }
 
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
+/* Services Preview Section */
+.servicesPreview {
+  padding: var(--spacing-4xl) 0;
+  background-color: var(--color-white);
 }
 
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
-.ctas a {
+.serviceCard {
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+  background-color: var(--color-off-white);
+}
+
+.serviceTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xs);
+}
+
+.serviceDescription {
+  font-size: var(--font-size-small);
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: var(--spacing-sm);
+}
+
+.servicePrice {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-jet-black);
+}
+
+.servicesCta {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+/* CTA Section */
+.cta {
+  padding: var(--spacing-4xl) 0;
+  background-color: var(--color-jet-black);
+  color: var(--color-white);
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.ctaContent {
+  text-align: center;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
+.ctaTitle {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.ctaText {
+  font-size: var(--font-size-body);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
   }
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
+  .heroContent {
+    padding: var(--spacing-2xl);
+  }
+
+  .heroVisual {
+    height: 400px;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 40px;
   }
 
-  .intro {
-    gap: 16px;
+  .heroCtas {
+    flex-direction: column;
   }
 
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+  .featureGrid {
+    grid-template-columns: 1fr;
   }
 
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+  .productGrid {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,241 @@
+.page {
+  min-height: 100vh;
+  padding-top: var(--header-height);
+  padding-bottom: var(--spacing-4xl);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.loading,
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: var(--spacing-md);
+}
+
+.backLink {
+  font-size: var(--font-size-small);
+  text-decoration: underline;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md) 0;
+  font-size: var(--font-size-caption);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.breadcrumb a:hover {
+  color: var(--color-jet-black);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--spacing-3xl);
+  padding-top: var(--spacing-lg);
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.mainImage {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background-color: var(--color-off-white);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.thumbnails {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.thumbnail {
+  position: relative;
+  width: 80px;
+  height: 100px;
+  border: 1px solid transparent;
+  transition: border-color var(--transition-fast);
+}
+
+.thumbnail.active {
+  border-color: var(--color-jet-black);
+}
+
+.thumbnail img {
+  object-fit: cover;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.brand {
+  font-size: var(--font-size-caption);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.stock {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-small);
+}
+
+.stockIndicator {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+}
+
+.price {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+}
+
+.description {
+  font-size: var(--font-size-body);
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.6;
+}
+
+.attributes {
+  padding: var(--spacing-md);
+  background-color: var(--color-off-white);
+}
+
+.attributesTitle {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.attributesList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.attributesList li {
+  display: flex;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-small);
+}
+
+.attrKey {
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: capitalize;
+}
+
+.attrValue {
+  color: var(--color-jet-black);
+  text-transform: capitalize;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.quantityButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  font-size: 18px;
+  transition: all var(--transition-fast);
+}
+
+.quantityButton:hover {
+  border-color: var(--color-jet-black);
+}
+
+.quantityValue {
+  min-width: 40px;
+  text-align: center;
+  font-size: var(--font-size-body);
+}
+
+.addToCartButton,
+.buyNowButton {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+}
+
+.addToCartButton {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-jet-black);
+  color: var(--color-jet-black);
+}
+
+.addToCartButton:hover {
+  background-color: var(--color-jet-black);
+  color: var(--color-white);
+}
+
+.buyNowButton {
+  background-color: var(--color-jet-black);
+  border: 1px solid var(--color-jet-black);
+  color: var(--color-white);
+}
+
+.buyNowButton:hover {
+  background-color: var(--color-charcoal);
+}
+
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: var(--font-size-h3);
+  }
+
+  .price {
+    font-size: var(--font-size-h3);
+  }
+}
