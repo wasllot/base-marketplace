@@ -20,6 +20,8 @@ interface ApiProduct {
   slug?: string;
 }
 
+const FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%23f2f2f2'/%3E%3Ctext x='50%25' y='50%25' fill='%23a9a9a9' font-family='sans-serif' font-size='16' text-anchor='middle' dominant-baseline='middle'%3ESin imagen%3C/text%3E%3C/svg%3E";
+
 function getProductImg(p: ApiProduct): string {
   if (p.image) return p.image;
   const imgs = p.images;
@@ -28,7 +30,7 @@ function getProductImg(p: ApiProduct): string {
     if (typeof first === 'string') return first;
     if (typeof first === 'object' && 'url' in first) return (first as { url: string }).url;
   }
-  return 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=900&q=80';
+  return FALLBACK_IMG;
 }
 
 function getAllImages(p: ApiProduct): string[] {

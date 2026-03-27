@@ -20,7 +20,7 @@ export interface ApiProduct {
   slug?: string;
 }
 
-const FALLBACK_IMG = 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=80';
+const FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23f2f2f2'/%3E%3Ctext x='50%25' y='50%25' fill='%23a9a9a9' font-family='sans-serif' font-size='14' text-anchor='middle' dominant-baseline='middle'%3ESin imagen%3C/text%3E%3C/svg%3E";
 
 function getImg(p: ApiProduct): string {
   if (p.image) return p.image;
