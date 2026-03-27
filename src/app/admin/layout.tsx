@@ -5,8 +5,12 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const navItems = [
-  { href: '/admin/contenido', label: 'Contenido del Sitio', icon: '✦' },
-  { href: '/admin/productos', label: 'Productos', icon: '◈' },
+  { href: '/admin/contenido',  label: 'Contenido del Sitio', icon: '✦', group: 'CMS' },
+  { href: '/admin/catalogo',   label: 'Catálogo',            icon: '▦', group: 'API' },
+  { href: '/admin/categorias', label: 'Categorías',          icon: '◈', group: 'API' },
+  { href: '/admin/pedidos',    label: 'Pedidos',             icon: '◎', group: 'API' },
+  { href: '/admin/tiendas',    label: 'Tiendas',             icon: '◇', group: 'API' },
+  { href: '/admin/productos',  label: 'Productos (Local)',   icon: '◆', group: 'LOCAL' },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -202,17 +206,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           <nav className="admin-nav">
-            <div className="admin-nav-label">Gestión</div>
-            {navItems.map(item => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`admin-nav-link ${pathname.startsWith(item.href) ? 'active' : ''}`}
-              >
-                <span className="admin-nav-icon">{item.icon}</span>
-                {item.label}
-              </Link>
-            ))}
+            {(['CMS', 'API', 'LOCAL'] as const).map(group => {
+              const items = navItems.filter(i => i.group === group);
+              const labels: Record<string, string> = { CMS: 'Contenido', API: 'API · Marketplace', LOCAL: 'Local' };
+              return (
+                <div key={group}>
+                  <div className="admin-nav-label">{labels[group]}</div>
+                  {items.map(item => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`admin-nav-link ${pathname.startsWith(item.href) ? 'active' : ''}`}
+                    >
+                      <span className="admin-nav-icon">{item.icon}</span>
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              );
+            })}
           </nav>
 
           <div className="admin-sidebar-footer">

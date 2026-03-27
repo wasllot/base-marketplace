@@ -14,6 +14,7 @@ const navLinks = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, toggleCart } = useCart();
 
   useEffect(() => {
@@ -28,13 +29,35 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
-        <Link href="/" className={styles.logo}>
-          BASE
-        </Link>
+        <div className={styles.leftActions}>
+          <button 
+            className={`${styles.iconButton} ${styles.hamburgerBtn}`} 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <Link href="/" className={styles.logo}>
+            BASE
+          </Link>
+        </div>
 
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.navOpen : ''}`}>
+          <div className={styles.mobileNavHeader}>
+            <span className={styles.logo}>BASE</span>
+            <button className={styles.iconButton} onClick={() => setIsMobileMenuOpen(false)}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
           {navLinks.map(link => (
-            <Link key={link.href} href={link.href} className={styles.navLink}>
+            <Link key={link.href} href={link.href} className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>
               {link.label}
             </Link>
           ))}

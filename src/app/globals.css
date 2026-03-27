@@ -188,3 +188,20 @@ h3 {
 .scale-in {
   animation: scaleIn var(--transition-normal) forwards;
 }
+
+.pd-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 120px);
+}
+@media (max-width: 900px) {
+  .pd-layout {
+    grid-template-columns: 1fr;
+  }
+  .pd-details {
+    padding: 2rem !important;
+  }
+  .pd-title {
+    font-size: 2rem !important;
+  }
+}

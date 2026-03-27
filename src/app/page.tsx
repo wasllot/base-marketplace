@@ -2,14 +2,16 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import { Product } from '@/lib/api/types';
-import ProductCard from '@/components/ui/ProductCard';
+import { apiFetch } from '@/lib/api/apiClient';
+import { API } from '@/lib/api/endpoints';
+import ProductCard, { ApiProduct } from '@/components/ui/ProductCard';
 
 export default function Home() {
   const [loaderDone, setLoaderDone] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ApiProduct[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [content, setContent] = useState<any>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDown = useRef(false);
@@ -95,12 +97,13 @@ export default function Home() {
       .then(data => setContent(data))
       .catch(() => {});
       
-    // Fetch products
-    fetch('/api/products')
-      .then(res => res.json())
+    // Fetch products from live API
+    apiFetch<{ data: ApiProduct[] } | ApiProduct[]>(API.PRODUCTS)
       .then(data => {
-        const prodList = Array.isArray(data) ? data : data.data || [];
-        setProducts(prodList.slice(0, 8)); // Get top 8
+        const prodList = Array.isArray(data) ? data : (data as { data: ApiProduct[] }).data || [];
+        // Show featured products first in the slider, up to 8 items
+        const featured = [...prodList].sort((a,b) => (b.is_featured?1:0) - (a.is_featured?1:0)).slice(0, 8);
+        setProducts(featured);
       })
       .catch(() => {});
   }, []);
@@ -556,6 +559,39 @@ export default function Home() {
           .slider-item {
             flex: 0 0 280px;
           }
+          
+          /* Hero mobile specific */
+          .hero-text-side { padding: 12vw 6vw; }
+          .hero-title-huge { font-size: clamp(2.5rem, 10vw, 4rem); }
+          .hero-desc { font-size: 1rem; }
+          .essential-title { font-size: 2.2rem; }
+          .btn-group { flex-direction: column; align-items: stretch; gap: 1rem; }
+          .btn-black { text-align: center; }
+          .btn-underline { align-self: center; }
+          
+          /* Mobile Nav */
+          .home-nav-links {
+            position: fixed; top: 0; left: -100%; width: 80vw; height: 100vh;
+            background: rgba(255,255,255,0.98);
+            flex-direction: column; align-items: flex-start;
+            padding: 5rem 2rem;
+            transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+          }
+          .home-nav-links.open { left: 0; }
+          .home-nav-link { font-size: 1.25rem; }
+          
+          .hamburger {
+            display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+            z-index: 1001; position: relative;
+          }
+          .hamburger span { width: 25px; height: 2px; background: var(--brand-black); transition: 0.3s; }
+          .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+          .hamburger.open span:nth-child(2) { opacity: 0; }
+          .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        }
+        @media (min-width: 601px) {
+          .hamburger { display: none; }
         }
       `}</style>
 
@@ -567,10 +603,15 @@ export default function Home() {
       {/* Nav */}
       <nav className={`home-nav ${scrolled ? 'scrolled' : ''}`}>
         <Link href="/" className="home-nav-logo">BASE</Link>
-        <div className="home-nav-links">
-          <Link href="/marketplace?category=moda" className="home-nav-link">Moda</Link>
-          <Link href="/marketplace?category=accesorios" className="home-nav-link">Accesorios</Link>
-          <Link href="/marketplace" className="home-nav-link">Marketplace</Link>
+        
+        <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <span></span><span></span><span></span>
+        </div>
+
+        <div className={`home-nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
+          <Link href="/marketplace?category=moda" className="home-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Moda</Link>
+          <Link href="/marketplace?category=accesorios" className="home-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Accesorios</Link>
+          <Link href="/marketplace" className="home-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Marketplace</Link>
         </div>
       </nav>
 
