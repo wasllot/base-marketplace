@@ -316,7 +316,7 @@ function MarketplaceContent() {
       </div>
 
       {/* ─── Body ─── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '240px 1fr', minHeight: '80vh' }}>
+      <div className="mp-layout-container">
 
         {/* Sidebar */}
         <aside style={{ borderRight: '1px solid #ebebeb', padding: '2.5rem 0', position: 'sticky', top: 'calc(64px + 51px)', height: 'calc(100vh - 115px)', overflowY: 'auto' }}>
@@ -501,15 +501,24 @@ function MarketplaceContent() {
           to   { opacity: 1; transform: translateX(0); }
         }
 
+        .mp-layout-container {
+          display: grid;
+          grid-template-columns: 240px 1fr;
+          min-height: 80vh;
+        }
+
         @media (max-width: 1100px) {
           .mp-products-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 768px) {
+          .mp-layout-container { grid-template-columns: 1fr; }
           aside { display: none; }
           .mp-products-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          main { padding: 1.5rem !important; }
         }
         @media (max-width: 480px) {
           .mp-products-grid { grid-template-columns: 1fr !important; }
+          main { padding: 1rem !important; }
         }
       `}</style>
     </>

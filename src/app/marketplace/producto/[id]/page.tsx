@@ -86,7 +86,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         <span style={{ color: '#000', fontWeight: 600 }}>{productName}</span>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'calc(100vh - 120px)' }}>
+      <div className="pd-layout">
 
         {/* Left: Image Gallery */}
         <div style={{ borderRight: '1px solid #ebebeb', display: 'flex', flexDirection: 'column' }}>
@@ -111,12 +111,12 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         </div>
 
         {/* Right: Details */}
-        <div style={{ padding: '3.5rem' }}>
+        <div style={{ padding: '3.5rem' }} className="pd-details">
           <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.2rem', textTransform: 'uppercase', color: '#A9A9A9', marginBottom: '1rem' }}>
             {catName && `${catName} · `}BASE
           </div>
 
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 200, letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#000' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 200, letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#000' }} className="pd-title">
             {productName}
           </h1>
 

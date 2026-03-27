@@ -11,6 +11,7 @@ export default function Home() {
   const [products, setProducts] = useState<ApiProduct[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [content, setContent] = useState<any>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDown = useRef(false);
@@ -558,6 +559,39 @@ export default function Home() {
           .slider-item {
             flex: 0 0 280px;
           }
+          
+          /* Hero mobile specific */
+          .hero-text-side { padding: 12vw 6vw; }
+          .hero-title-huge { font-size: clamp(2.5rem, 10vw, 4rem); }
+          .hero-desc { font-size: 1rem; }
+          .essential-title { font-size: 2.2rem; }
+          .btn-group { flex-direction: column; align-items: stretch; gap: 1rem; }
+          .btn-black { text-align: center; }
+          .btn-underline { align-self: center; }
+          
+          /* Mobile Nav */
+          .home-nav-links {
+            position: fixed; top: 0; left: -100%; width: 80vw; height: 100vh;
+            background: rgba(255,255,255,0.98);
+            flex-direction: column; align-items: flex-start;
+            padding: 5rem 2rem;
+            transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+          }
+          .home-nav-links.open { left: 0; }
+          .home-nav-link { font-size: 1.25rem; }
+          
+          .hamburger {
+            display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+            z-index: 1001; position: relative;
+          }
+          .hamburger span { width: 25px; height: 2px; background: var(--brand-black); transition: 0.3s; }
+          .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+          .hamburger.open span:nth-child(2) { opacity: 0; }
+          .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        }
+        @media (min-width: 601px) {
+          .hamburger { display: none; }
         }
       `}</style>
 
@@ -569,10 +603,15 @@ export default function Home() {
       {/* Nav */}
       <nav className={`home-nav ${scrolled ? 'scrolled' : ''}`}>
         <Link href="/" className="home-nav-logo">BASE</Link>
-        <div className="home-nav-links">
-          <Link href="/marketplace?category=moda" className="home-nav-link">Moda</Link>
-          <Link href="/marketplace?category=accesorios" className="home-nav-link">Accesorios</Link>
-          <Link href="/marketplace" className="home-nav-link">Marketplace</Link>
+        
+        <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <span></span><span></span><span></span>
+        </div>
+
+        <div className={`home-nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
+          <Link href="/marketplace?category=moda" className="home-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Moda</Link>
+          <Link href="/marketplace?category=accesorios" className="home-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Accesorios</Link>
+          <Link href="/marketplace" className="home-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Marketplace</Link>
         </div>
       </nav>
 
