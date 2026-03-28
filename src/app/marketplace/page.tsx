@@ -382,7 +382,7 @@ function MarketplaceContent() {
               </button>
             </div>
           ) : (
-            <div className="mp-products-grid" style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}>
+            <div className="mp-products-grid" style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}>
               {products.map((product, i) => (
                 <React.Fragment key={product.id}>
                   {i === 6 && (
@@ -413,7 +413,7 @@ function MarketplaceContent() {
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '2rem' }}>
             <div style={{ fontSize: '1rem', fontWeight: 700, letterSpacing: '0.05em' }}>Vistos recientemente</div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 1, background: '#ebebeb', marginBottom: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: 1, background: '#ebebeb', marginBottom: '3rem' }}>
             {products.slice(0, 5).map(product => (
               <Link key={product.id} href={`/marketplace/producto/${product.id}`} style={{ textDecoration: 'none', color: 'inherit', background: '#fff' }}>
                 <div style={{ aspectRatio: '3/4', overflow: 'hidden' }}>
@@ -514,7 +514,7 @@ function MarketplaceContent() {
         .mp-nav-cart { display: flex; align-items: center; gap: 0.5rem; background: #000; color: #fff; padding: 0.5rem 1.1rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12rem; text-transform: uppercase; cursor: pointer; }
         .mp-nav-cart-badge { background: #fff; color: #000; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; font-weight: 800; }
         
-        .mp-hero-banner { margin-top: 64px; height: 52vh; min-height: 340px; background: #000; display: grid; grid-template-columns: 1fr 1fr 1fr; position: relative; overflow: hidden; }
+        .mp-hero-banner { margin-top: 64px; height: 52vh; min-height: 340px; background: #000; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; overflow: hidden; }
         .mp-hero-col { position: relative; overflow: hidden; border-right: 1px solid rgba(255,255,255,0.07); }
         .mp-hero-col:last-child { border-right: none; }
         .mp-hero-col-bg { position: absolute; inset: 0; transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
@@ -536,7 +536,7 @@ function MarketplaceContent() {
         .mp-toolbar-grid-toggles button { width: 28px; height: 28px; border: 1px solid #ebebeb; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #A9A9A9; transition: all 0.2s; }
         .mp-toolbar-grid-toggles button.active { border-color: #000; background: #000; color: #fff; }
 
-        .mp-sidebar { border-right: 1px solid #ebebeb; padding: 2.5rem 1.5rem; position: sticky; top: calc(64px + 51px); height: calc(100vh - 115px); overflow-y: auto; }
+        .mp-sidebar { border-right: 1px solid #ebebeb; padding: 2.5rem 1.5rem; position: sticky; top: calc(64px + 51px); }
         .mp-sidebar-mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 0 2rem; border-bottom: 1px solid #ebebeb; margin-bottom: 1.5rem; }
         .mp-filter-section { padding: 0 0 2rem; border-bottom: 1px solid #ebebeb; margin-bottom: 1.5rem; }
         .mp-filter-title { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2rem; text-transform: uppercase; color: #000; margin-bottom: 1.4rem; }
@@ -550,16 +550,16 @@ function MarketplaceContent() {
         .mp-clear-filters { display: block; width: 100%; padding: 0.7rem; border: 1px solid #ebebeb; background: transparent; cursor: pointer; font-family: 'Montserrat',sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15rem; text-transform: uppercase; color: #2a2a2a; text-align: center; }
 
         .mp-main-content { padding: 2.5rem; overflow: hidden; }
-        .mp-pills { display: flex; overflow-x: auto; gap: 0.5rem; margin-bottom: 2.5rem; padding-bottom: 0.5rem; scrollbar-width: none; }
-        .mp-pills::-webkit-scrollbar { display: none; }
+        .mp-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
         .mp-pill-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.1rem; border: 1px solid #ebebeb; border-radius: 2rem; background: transparent; cursor: pointer; font-family: 'Montserrat',sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1rem; text-transform: uppercase; color: #2a2a2a; white-space: nowrap; transition: all 0.25s; }
         .mp-pill-btn.active { border-color: #000; background: #000; color: #fff; }
 
         .mp-layout-container {
           display: grid;
-          grid-template-columns: 280px 1fr;
+          grid-template-columns: 280px minmax(0, 1fr);
           min-height: 80vh;
           width: 100%;
+          overflow-x: hidden;
         }
 
         @media (max-width: 1100px) {
