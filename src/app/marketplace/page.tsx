@@ -420,14 +420,14 @@ function MarketplaceContent() {
 
       {/* ─── Recently Viewed ─── */}
       {products.length > 0 && (
-        <div style={{ borderTop: '1px solid #ebebeb', padding: '3rem 2.5rem 0' }}>
+        <div className="mp-recently-viewed-wrapper">
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '2rem' }}>
             <div style={{ fontSize: '1rem', fontWeight: 700, letterSpacing: '0.05em' }}>Vistos recientemente</div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: 1, background: '#ebebeb', marginBottom: '3rem' }}>
+          <div className="mp-recently-viewed-grid">
             {products.slice(0, 5).map(product => (
-              <Link key={product.id} href={`/marketplace/producto/${product.id}`} style={{ textDecoration: 'none', color: 'inherit', background: '#fff' }}>
-                <div style={{ aspectRatio: '3/4', overflow: 'hidden' }}>
+              <Link key={product.id} href={`/marketplace/producto/${product.id}`} className="mp-recently-viewed-card">
+                <div className="mp-recently-viewed-img">
                   <img src={getImg(product)} alt={product.name ?? product.title ?? ''} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} />
                 </div>
                 <div style={{ padding: '0.8rem 1rem' }}>
@@ -584,6 +584,11 @@ function MarketplaceContent() {
           overflow-x: hidden;
         }
 
+        .mp-recently-viewed-wrapper { border-top: 1px solid #ebebeb; padding: 3rem 2.5rem 0; }
+        .mp-recently-viewed-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: #ebebeb; margin-bottom: 3rem; }
+        .mp-recently-viewed-card { text-decoration: none; color: inherit; background: #fff; }
+        .mp-recently-viewed-img { aspect-ratio: 3/4; overflow: hidden; }
+
         @media (max-width: 1100px) {
           .mp-products-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
@@ -619,6 +624,11 @@ function MarketplaceContent() {
           .mp-toolbar-filter-btn { flex: 1; justify-content: center; padding: 0.7rem; border-radius: 2rem; font-size: 0.55rem; }
           .mp-toolbar-sort { flex: 1; justify-content: center; border: 1px solid #ebebeb; border-radius: 2rem; padding: 0.7rem; font-size: 0.55rem; }
           .mp-toolbar-sort select { font-size: 0.55rem; width: 100%; text-align: center; text-align-last: center; }
+          
+          .mp-recently-viewed-wrapper { padding: 2rem 1rem 0; }
+          .mp-recently-viewed-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; gap: 1rem; background: transparent; padding-bottom: 1rem; }
+          .mp-recently-viewed-grid::-webkit-scrollbar { display: none; }
+          .mp-recently-viewed-card { flex: 0 0 65%; scroll-snap-align: center; border: 1px solid #ebebeb; border-radius: 8px; overflow: hidden; }
         }
         @media (max-width: 480px) {
           .mp-main-content { padding: 0 1rem 1rem !important; }
@@ -631,6 +641,7 @@ function MarketplaceContent() {
           .mp-nav-icon-mobile { display: block !important; }
           .mp-nav-cart-badge { position: absolute; top: 0; right: 0; transform: translate(25%, -25%); border: 2px solid #fff; }
           .mp-hero-col { min-height: 300px; }
+          .mp-nav-center { font-size: 0.48rem; letter-spacing: 0.2rem; margin-right: -0.2rem; }
           
           .mp-product-info { padding: 0.8rem 0.8rem 0; }
           .mp-product-price-container { padding: 0 0.8rem 0.8rem; }
