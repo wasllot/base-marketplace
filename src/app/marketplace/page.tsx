@@ -240,8 +240,19 @@ function MarketplaceContent() {
             <svg viewBox="0 0 24 24" style={{ width: 13, height: 13, stroke: '#A9A9A9', fill: 'none', strokeWidth: 2, flexShrink: 0 }}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" placeholder="Buscar..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
-          <Link href="/cuenta" className="mp-nav-account">Mi Cuenta</Link>
+          <Link href="/cuenta" className="mp-nav-account">
+            <svg className="mp-nav-icon-mobile" viewBox="0 0 24 24" style={{ width: 15, height: 15, stroke: 'currentColor', fill: 'none', strokeWidth: 1.5, display: 'none' }}>
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span className="mp-nav-account-text">Mi Cuenta</span>
+          </Link>
           <div className="mp-nav-cart" onClick={() => {}}> 
+            <svg className="mp-nav-icon-mobile" viewBox="0 0 24 24" style={{ width: 14, height: 14, stroke: 'currentColor', fill: 'none', strokeWidth: 1.5, display: 'none' }}>
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
             <span className="mp-nav-cart-text">Carrito</span>
             {cartCount > 0 && <div className="mp-nav-cart-badge">{cartCount}</div>}
           </div>
@@ -614,9 +625,11 @@ function MarketplaceContent() {
           .mp-pills { margin-bottom: 1.5rem; }
           .mp-product-img { aspect-ratio: 4/5; }
           .mp-nav-account { font-size: 0; padding: 0; border: none; width: 38px; height: 38px; border-radius: 50%; justify-content: center; background: #f7f7f7; }
-          .mp-nav-account::after { content: '👤'; font-size: 1.2rem; }
+          .mp-nav-account-text { display: none; }
           .mp-nav-cart-text { display: none; }
-          .mp-nav-cart { padding: 0; width: 38px; height: 38px; border-radius: 50%; justify-content: center; }
+          .mp-nav-cart { padding: 0; width: 38px; height: 38px; border-radius: 50%; justify-content: center; position: relative; }
+          .mp-nav-icon-mobile { display: block !important; }
+          .mp-nav-cart-badge { position: absolute; top: 0; right: 0; transform: translate(25%, -25%); border: 2px solid #fff; }
           .mp-hero-col { min-height: 300px; }
           
           .mp-product-info { padding: 0.8rem 0.8rem 0; }
