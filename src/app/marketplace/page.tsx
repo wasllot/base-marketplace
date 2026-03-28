@@ -95,7 +95,7 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, wishlisted }: {
   };
 
   return (
-    <div className="mp-product-card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div className="mp-product-card">
       <Link href={`/marketplace/producto/${product.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block', flex: 1 }}>
         <div className="mp-product-img">
           <img src={img} alt={productName} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)' }} />
@@ -111,18 +111,18 @@ function ProductCard({ product, onAddToCart, onToggleWishlist, wishlisted }: {
             <button className="mp-quick-add-btn" onClick={(e) => { e.preventDefault(); onAddToCart(String(product.id)); }}>+ Agregar</button>
           </div>
         </div>
-        <div style={{ padding: '1.2rem 1.4rem 0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
-            <div style={{ fontSize: '0.55rem', fontWeight: 600, letterSpacing: '0.2rem', textTransform: 'uppercase', color: '#A9A9A9' }}>{catName}</div>
+        <div className="mp-product-info">
+          <div className="mp-product-meta">
+            <div className="mp-product-cat">{catName}</div>
             <StarRating />
           </div>
-          <div style={{ fontSize: '0.82rem', fontWeight: 600, letterSpacing: '0.03em', color: '#000', marginBottom: '0.6rem', lineHeight: 1.3 }}>{productName}</div>
+          <div className="mp-product-title">{productName}</div>
         </div>
       </Link>
-      <div style={{ padding: '0 1.4rem 1.4rem' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem' }}>
-          <div style={{ fontSize: '0.82rem', fontWeight: 700, color: hasSale ? '#c0392b' : '#000' }}>${price.toLocaleString('es-AR')}</div>
-          {hasSale && <div style={{ fontSize: '0.72rem', fontWeight: 300, color: '#A9A9A9', textDecoration: 'line-through' }}>${origPrice!.toLocaleString('es-AR')}</div>}
+      <div className="mp-product-price-container">
+        <div className="mp-product-price-row">
+          <div className="mp-product-price-current" style={{ color: hasSale ? '#c0392b' : '#000' }}>${price.toLocaleString('es-AR')}</div>
+          {hasSale && <div className="mp-product-price-old">${origPrice!.toLocaleString('es-AR')}</div>}
         </div>
       </div>
     </div>
@@ -452,7 +452,18 @@ function MarketplaceContent() {
           position: relative;
           background: #fff;
           transition: background 0.3s;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
         }
+        .mp-product-info { padding: 1.2rem 1.4rem 0; }
+        .mp-product-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; }
+        .mp-product-cat { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.2rem; text-transform: uppercase; color: #A9A9A9; }
+        .mp-product-title { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.03em; color: #000; margin-bottom: 0.6rem; line-height: 1.3; }
+        .mp-product-price-container { padding: 0 1.4rem 1.4rem; margin-top: auto; }
+        .mp-product-price-row { display: flex; align-items: baseline; gap: 0.6rem; }
+        .mp-product-price-current { font-size: 0.82rem; font-weight: 700; }
+        .mp-product-price-old { font-size: 0.72rem; font-weight: 300; color: #A9A9A9; text-decoration: line-through; }
         .mp-product-card:hover { background: #f7f7f7; }
 
         .mp-product-img {
@@ -607,6 +618,14 @@ function MarketplaceContent() {
           .mp-nav-cart-text { display: none; }
           .mp-nav-cart { padding: 0; width: 38px; height: 38px; border-radius: 50%; justify-content: center; }
           .mp-hero-col { min-height: 300px; }
+          
+          .mp-product-info { padding: 0.8rem 0.8rem 0; }
+          .mp-product-price-container { padding: 0 0.8rem 0.8rem; }
+          .mp-product-cat { font-size: 0.45rem; letter-spacing: 0.05em; }
+          .mp-product-title { font-size: 0.68rem; margin-bottom: 0.4rem; }
+          .mp-product-price-current { font-size: 0.75rem; }
+          .mp-product-price-old { font-size: 0.65rem; }
+          .mp-quick-add-btn { padding: 0.6rem; font-size: 0.5rem; letter-spacing: 0.05rem; }
         }
       `}</style>
     </>
