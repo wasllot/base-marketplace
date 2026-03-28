@@ -30,7 +30,7 @@
   width: 360px;
   height: 480px;
   max-height: calc(100vh - 120px);
-  max-width: calc(100vw - 32px);
+  max-width: calc(100% - 32px);
   background-color: var(--color-white);
   border: 1px solid var(--border-color);
   display: flex;

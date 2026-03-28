@@ -12,6 +12,13 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [content, setContent] = useState<any>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [heroVideoIndex, setHeroVideoIndex] = useState(0);
+
+  const heroVideos = [
+    "https://pub-9e599175b00a4fe9b7dfce1c3f8a091a.r2.dev/videos/video-home-1.mp4",
+    "https://pub-9e599175b00a4fe9b7dfce1c3f8a091a.r2.dev/videos/video-home-2.mp4",
+    "https://pub-9e599175b00a4fe9b7dfce1c3f8a091a.r2.dev/videos/video-home-3.mp4"
+  ];
 
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDown = useRef(false);
@@ -211,7 +218,7 @@ export default function Home() {
         /* Cinematic Hero */
         .cinematic-hero {
           min-height: 100vh;
-          width: 100vw;
+          width: 100%;
           display: grid;
           grid-template-columns: 1fr 1fr;
           position: relative;
@@ -238,13 +245,6 @@ export default function Home() {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transform: scale(1.05);
-          animation: slowZoom 20s infinite alternate linear;
-        }
-
-        @keyframes slowZoom {
-          0% { transform: scale(1.05); }
-          100% { transform: scale(1.15); }
         }
 
         .hero-tag {
@@ -373,7 +373,7 @@ export default function Home() {
         }
         
         .edit-img-pane {
-          background: url('https://images.unsplash.com/photo-1618677603286-0ec56cb6e1b5?w=1200&q=80') center/cover;
+          background: url('https://pub-9e599175b00a4fe9b7dfce1c3f8a091a.r2.dev/images/editorial_fashion_photography_of_a_modern_stylish.jpeg') center/cover;
           position: relative;
         }
         
@@ -635,7 +635,15 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-image-side">
-          <img src={hero.heroImage} alt="BASE Editorial" className="hero-img" />
+          <video 
+            key={heroVideoIndex}
+            src={heroVideos[heroVideoIndex]}
+            autoPlay 
+            muted 
+            playsInline 
+            className="hero-img" 
+            onEnded={() => setHeroVideoIndex((prev) => (prev + 1) % heroVideos.length)}
+          />
         </div>
       </section>
 

@@ -39,8 +39,11 @@ export default function PedidosAdminPage() {
     setLoading(true);
     setError('');
     try {
-      const data = await apiFetch<{ data: Order[] } | Order[]>(API.ORDERS);
-      const list = Array.isArray(data) ? data : (data as { data: Order[] }).data ?? [];
+      const res = await apiFetch<any>(API.ORDERS);
+      let list: Order[] = [];
+      if (Array.isArray(res)) list = res;
+      else if (res?.data?.data) list = res.data.data;
+      else if (res?.data) list = Array.isArray(res.data) ? res.data : [];
       setOrders(list);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : 'Error al cargar pedidos. Asegúrate de estar autenticado.');

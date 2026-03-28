@@ -1,4 +1,5 @@
-const BASE = 'https://api.reinaldotineo.online';
+// Utilizing the BFF proxy route to hide the real API URL
+const BASE = '/api/proxy';
 
 export const API = {
   // Auth
@@ -28,4 +29,20 @@ export const API = {
   USER:         `${BASE}/api/v1/user`,
   USER_PROFILE: `${BASE}/api/v1/user/profile`,
   WISHLIST:     `${BASE}/api/v1/wishlist`,
+
+  // Seller Dashboard (Protected)
+  SELLER_ME:          `${BASE}/api/v1/sellers/me`,
+  SELLER_PRODUCTS:    `${BASE}/api/v1/sellers/me/products`,
+  SELLER_PRODUCT:     (id: string | number) => `${BASE}/api/v1/sellers/me/products/${id}`,
+
+  // Admin Dashboard (Protected - Admin Only)
+  ADMIN_STORES:       `${BASE}/api/v1/admin/stores`,
+  ADMIN_STORE:        (id: string | number) => `${BASE}/api/v1/admin/stores/${id}`,
+  ADMIN_STORE_IMPRS:  (id: string | number) => `${BASE}/api/v1/admin/stores/${id}/impersonate`,
+  ADMIN_STORE_APPRV:  (id: string | number) => `${BASE}/api/v1/admin/stores/${id}/approve`,
+  ADMIN_PRODUCTS:     `${BASE}/api/v1/admin/products`,
+  ADMIN_PRODUCT:      (id: string | number) => `${BASE}/api/v1/admin/products/${id}`,
+
+  // Image Uploads
+  UPLOAD_IMAGE:       `${BASE}/api/v1/upload/image`,
 } as const;

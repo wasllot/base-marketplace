@@ -52,9 +52,9 @@ function getCatName(p: ApiProduct): string {
 // ─── Hero images ──────────────────────────────────────────────────────────────
 
 const HERO_IMGS = [
-  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
-  'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900&q=80',
-  'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&q=80',
+  'https://pub-9e599175b00a4fe9b7dfce1c3f8a091a.r2.dev/images/lifestyle_fashion_image_representing_the_target_audience.jpeg',
+  'https://pub-9e599175b00a4fe9b7dfce1c3f8a091a.r2.dev/images/conceptual_visual_representing_the_urban_identity_and.jpeg',
+  'https://pub-9e599175b00a4fe9b7dfce1c3f8a091a.r2.dev/images/conceptual_fashion_brand_image_representing_identity_confidence.jpeg',
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -139,6 +139,7 @@ function MarketplaceContent() {
   const [wishlist, setWishlist] = useState<Set<string>>(new Set());
   const [toast, setToast] = useState('');
   const [gridCols, setGridCols] = useState<3 | 4>(3);
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [priceMin, setPriceMin] = useState('');
@@ -224,56 +225,44 @@ function MarketplaceContent() {
       )}
 
       {/* ─── Nav ─── */}
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 2.5rem', background: 'rgba(255,255,255,0.94)', backdropFilter: 'blur(24px)', borderBottom: '1px solid #ebebeb' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.6rem', fontWeight: 500, letterSpacing: '0.15rem', textTransform: 'uppercase', color: '#A9A9A9', textDecoration: 'none' }}>
+      <nav className="mp-nav">
+        <div className="mp-nav-left">
+          <Link href="/" className="mp-nav-home">
             <svg viewBox="0 0 24 24" style={{ width: 14, height: 14, stroke: 'currentColor', fill: 'none', strokeWidth: 1.5 }}><polyline points="15 18 9 12 15 6"/></svg>
-            Inicio
+            <span className="mp-nav-home-text">Inicio</span>
           </Link>
-          <div style={{ width: 1, height: 18, background: '#ebebeb' }} />
-          <Link href="/" style={{ fontSize: '0.9rem', fontWeight: 800, letterSpacing: '0.5rem', textDecoration: 'none', color: '#000', textTransform: 'uppercase' }}>BASE</Link>
+          <div className="mp-nav-divider" />
+          <Link href="/" className="mp-nav-logo">BASE</Link>
         </div>
-        <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.4rem', textTransform: 'uppercase', color: '#424242' }}>
-          Marketplace
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', border: '1px solid #ebebeb', padding: '0.45rem 1rem' }}>
+        <div className="mp-nav-center">Marketplace</div>
+        <div className="mp-nav-right">
+          <div className="mp-nav-search">
             <svg viewBox="0 0 24 24" style={{ width: 13, height: 13, stroke: '#A9A9A9', fill: 'none', strokeWidth: 2, flexShrink: 0 }}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Buscar productos..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-              style={{ border: 'none', outline: 'none', background: 'transparent', fontFamily: 'Montserrat,sans-serif', fontSize: '0.65rem', width: 160, color: '#000' }} />
+            <input type="text" placeholder="Buscar..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
-          <Link href="/cuenta"
-            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid #ebebeb', color: '#000', padding: '0.5rem 1.1rem', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12rem', textTransform: 'uppercase', textDecoration: 'none' }}
-          >
-            Mi Cuenta
-          </Link>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#000', color: '#fff', padding: '0.5rem 1.1rem', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12rem', textTransform: 'uppercase', cursor: 'pointer' }}>
-            Carrito
-            {cartCount > 0 && (
-              <div style={{ background: '#fff', color: '#000', width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.5rem', fontWeight: 800 }}>
-                {cartCount}
-              </div>
-            )}
+          <Link href="/cuenta" className="mp-nav-account">Mi Cuenta</Link>
+          <div className="mp-nav-cart" onClick={() => {}}> 
+            <span className="mp-nav-cart-text">Carrito</span>
+            {cartCount > 0 && <div className="mp-nav-cart-badge">{cartCount}</div>}
           </div>
         </div>
       </nav>
 
       {/* ─── Hero ─── */}
-      <div style={{ marginTop: 64, height: '52vh', minHeight: 340, background: '#000', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', position: 'relative', overflow: 'hidden' }}>
+      <div className="mp-hero-banner">
         {[
           { tag: 'Temporada 2026', title: 'Nueva\nColección', link: 'Explorar', img: HERO_IMGS[0] },
           { tag: 'Accesorios', title: 'Piezas\nEsenciales', link: 'Ver todo', img: HERO_IMGS[1] },
           { tag: 'Exclusivo', title: 'Drops\nLimitados', link: 'Descubrir', img: HERO_IMGS[2] },
         ].map((col, i) => (
-          <div key={i} className="mp-hero-col"
-            style={{ position: 'relative', overflow: 'hidden', borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
-            <div className="mp-hero-col-bg" style={{ position: 'absolute', inset: 0, transition: 'transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94)' }}>
+          <div key={i} className="mp-hero-col">
+            <div className="mp-hero-col-bg">
               <img src={col.img} alt={col.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55)' }} />
             </div>
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2.5rem', background: 'linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 60%)' }}>
-              <div style={{ fontSize: '0.55rem', fontWeight: 600, letterSpacing: '0.25rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '0.5rem' }}>{col.tag}</div>
-              <div style={{ fontSize: 'clamp(1.1rem,2.5vw,1.8rem)', fontWeight: 700, color: '#fff', lineHeight: 1.15, marginBottom: '1rem', whiteSpace: 'pre-line' }}>{col.title}</div>
-              <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.58rem', fontWeight: 600, letterSpacing: '0.15rem', textTransform: 'uppercase', textDecoration: 'none', color: 'rgba(255,255,255,0.6)' }}>
+            <div className="mp-hero-col-content">
+              <div className="mp-hero-col-tag">{col.tag}</div>
+              <div className="mp-hero-col-title">{col.title}</div>
+              <a href="#" className="mp-hero-col-link">
                 {col.link}
                 <svg viewBox="0 0 24 24" style={{ width: 13, height: 13, stroke: 'currentColor', fill: 'none', strokeWidth: 2 }}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
@@ -283,29 +272,31 @@ function MarketplaceContent() {
       </div>
 
       {/* ─── Toolbar ─── */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.2rem 2.5rem', borderBottom: '1px solid #ebebeb', background: '#fff', position: 'sticky', top: 64, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.6rem', fontWeight: 500, letterSpacing: '0.08rem', color: '#A9A9A9' }}>
-          <Link href="/" style={{ textDecoration: 'none', color: '#A9A9A9' }}>Inicio</Link>
-          <span style={{ color: '#D3D3D3' }}>›</span>
-          <span style={{ color: '#000', fontWeight: 600 }}>Marketplace</span>
+      <div className="mp-toolbar">
+        <div className="mp-breadcrumbs">
+          <Link href="/">Inicio</Link>
+          <span>›</span>
+          <strong>Marketplace</strong>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <span style={{ fontSize: '0.6rem', fontWeight: 400, color: '#A9A9A9' }}>
+        <div className="mp-toolbar-actions">
+          <span className="mp-toolbar-count">
             {loading ? 'Cargando...' : `${products.length} productos`}
           </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.6rem', fontWeight: 500, color: '#2a2a2a' }}>
-            <span>Ordenar:</span>
-            <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent', fontFamily: 'Montserrat,sans-serif', fontSize: '0.6rem', fontWeight: 600, color: '#000', cursor: 'pointer', appearance: 'none', paddingRight: '1rem' }}>
+          <button className="mp-toolbar-filter-btn" onClick={() => setIsMobileFiltersOpen(true)}>
+            Filtros
+          </button>
+          <div className="mp-toolbar-sort">
+            <span className="mp-toolbar-sort-label">Ordenar:</span>
+            <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
               <option value="featured">Destacados</option>
               <option value="newest">Más recientes</option>
-              <option value="price_asc">Precio: menor a mayor</option>
-              <option value="price_desc">Precio: mayor a menor</option>
+              <option value="price_asc">Menor a mayor</option>
+              <option value="price_desc">Mayor a menor</option>
             </select>
           </div>
-          <div style={{ display: 'flex', gap: '0.4rem' }}>
+          <div className="mp-toolbar-grid-toggles">
             {([3, 4] as const).map(n => (
-              <button key={n} onClick={() => setGridCols(n)}
-                style={{ width: 28, height: 28, border: `1px solid ${gridCols === n ? '#000' : '#ebebeb'}`, background: gridCols === n ? '#000' : 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: gridCols === n ? '#fff' : '#A9A9A9', transition: 'all 0.2s' }}>
+              <button key={n} onClick={() => setGridCols(n)} className={gridCols === n ? 'active' : ''}>
                 <svg viewBox="0 0 24 24" style={{ width: 12, height: 12, stroke: 'currentColor', fill: 'none', strokeWidth: 1.5 }}>
                   {n === 3 ? <><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></> : <><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></>}
                 </svg>
@@ -319,17 +310,21 @@ function MarketplaceContent() {
       <div className="mp-layout-container">
 
         {/* Sidebar */}
-        <aside style={{ borderRight: '1px solid #ebebeb', padding: '2.5rem 0', position: 'sticky', top: 'calc(64px + 51px)', height: 'calc(100vh - 115px)', overflowY: 'auto' }}>
+        <aside className={`mp-sidebar ${isMobileFiltersOpen ? 'open' : ''}`}>
+          
+          <div className="mp-sidebar-mobile-header">
+            <span style={{ fontWeight: 700, letterSpacing: '0.15rem', textTransform: 'uppercase', fontSize: '0.75rem' }}>Filtros</span>
+            <button onClick={() => setIsMobileFiltersOpen(false)} style={{ fontSize: '1.5rem', background: 'none', border: 'none', cursor: 'pointer' }}>&times;</button>
+          </div>
 
           {/* Category — live from API */}
-          <div style={{ padding: '0 2rem 2rem', borderBottom: '1px solid #ebebeb', marginBottom: '1.5rem' }}>
-            <div style={{ fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.2rem', textTransform: 'uppercase', color: '#000', marginBottom: '1.4rem' }}>Categoría</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+          <div className="mp-filter-section">
+            <div className="mp-filter-title">Categoría</div>
+            <div className="mp-filter-options">
               {[{ id: '', name: 'Todos' }, ...categories].map(c => (
-                <label key={String(c.id)} style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', fontSize: '0.68rem', color: '#2a2a2a', cursor: 'pointer' }}>
+                <label key={String(c.id)} className="mp-filter-label">
                   <input type="checkbox" checked={selectedCategory === String(c.id)}
                     onChange={() => setSelectedCategory(c.id === '' ? '' : String(c.id))}
-                    style={{ width: 14, height: 14, appearance: 'none', border: '1px solid #D3D3D3', cursor: 'pointer', accentColor: '#000' }}
                   />
                   {c.name}
                 </label>
@@ -338,26 +333,25 @@ function MarketplaceContent() {
           </div>
 
           {/* Price */}
-          <div style={{ padding: '0 2rem 2rem', borderBottom: '1px solid #ebebeb', marginBottom: '1.5rem' }}>
-            <div style={{ fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.2rem', textTransform: 'uppercase', color: '#000', marginBottom: '1.4rem' }}>Precio</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <input type="text" placeholder="$0" value={priceMin} onChange={e => setPriceMin(e.target.value)} style={{ flex: 1, border: '1px solid #ebebeb', padding: '0.5rem 0.7rem', fontFamily: 'Montserrat,sans-serif', fontSize: '0.65rem', color: '#000', outline: 'none', background: 'transparent' }} />
-              <span style={{ fontSize: '0.6rem', color: '#A9A9A9', flexShrink: 0 }}>—</span>
-              <input type="text" placeholder="$200.000" value={priceMax} onChange={e => setPriceMax(e.target.value)} style={{ flex: 1, border: '1px solid #ebebeb', padding: '0.5rem 0.7rem', fontFamily: 'Montserrat,sans-serif', fontSize: '0.65rem', color: '#000', outline: 'none', background: 'transparent' }} />
+          <div className="mp-filter-section">
+            <div className="mp-filter-title">Precio</div>
+            <div className="mp-price-inputs">
+              <input type="text" placeholder="$0" value={priceMin} onChange={e => setPriceMin(e.target.value)} />
+              <span>—</span>
+              <input type="text" placeholder="$200.000" value={priceMax} onChange={e => setPriceMax(e.target.value)} />
             </div>
           </div>
 
-          <button onClick={clearFilters}
-            style={{ display: 'block', width: 'calc(100% - 4rem)', margin: '0 2rem', padding: '0.7rem', border: '1px solid #ebebeb', background: 'transparent', cursor: 'pointer', fontFamily: 'Montserrat,sans-serif', fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.15rem', textTransform: 'uppercase', color: '#2a2a2a', textAlign: 'center' }}>
+          <button onClick={clearFilters} className="mp-clear-filters">
             Limpiar filtros
           </button>
         </aside>
 
         {/* Main */}
-        <main style={{ padding: '2.5rem' }}>
+        <main className="mp-main-content">
 
           {/* Pill filters */}
-          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+          <div className="mp-pills">
             {pills.map(pill => (
               <button key={pill}
                 onClick={() => {
@@ -368,7 +362,7 @@ function MarketplaceContent() {
                     if (match) setSelectedCategory(String(match.id));
                   }
                 }}
-                style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0.55rem 1.1rem', border: `1px solid ${activePill === pill ? '#000' : '#ebebeb'}`, background: activePill === pill ? '#000' : 'transparent', cursor: 'pointer', fontFamily: 'Montserrat,sans-serif', fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.1rem', textTransform: 'uppercase', color: activePill === pill ? '#fff' : '#2a2a2a', whiteSpace: 'nowrap', transition: 'all 0.25s' }}>
+                className={`mp-pill-btn ${activePill === pill ? 'active' : ''}`}>
                 {pill}
               </button>
             ))}
@@ -501,24 +495,118 @@ function MarketplaceContent() {
           to   { opacity: 1; transform: translateX(0); }
         }
 
+        /* --- New Responsive Classes --- */
+        .mp-nav {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 64px;
+          display: flex; alignItems: center; justify-content: space-between;
+          padding: 0 2.5rem; background: rgba(255,255,255,0.94);
+          backdrop-filter: blur(24px); border-bottom: 1px solid #ebebeb;
+        }
+        .mp-nav-left { display: flex; align-items: center; gap: 2rem; }
+        .mp-nav-home { display: flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.15rem; text-transform: uppercase; color: #A9A9A9; text-decoration: none; }
+        .mp-nav-divider { width: 1px; height: 18px; background: #ebebeb; }
+        .mp-nav-logo { font-size: 0.9rem; font-weight: 800; letter-spacing: 0.5rem; text-decoration: none; color: #000; text-transform: uppercase; }
+        .mp-nav-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4rem; margin-right: -0.4rem; text-align: center; white-space: nowrap; text-transform: uppercase; color: #424242; }
+        .mp-nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .mp-nav-search { display: flex; align-items: center; gap: 0.6rem; border: 1px solid #ebebeb; padding: 0.45rem 1rem; }
+        .mp-nav-search input { border: none; outline: none; background: transparent; font-family: 'Montserrat',sans-serif; font-size: 0.65rem; width: 160px; color: #000; }
+        .mp-nav-account { display: flex; align-items: center; gap: 0.5rem; border: 1px solid #ebebeb; color: #000; padding: 0.5rem 1.1rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12rem; text-transform: uppercase; text-decoration: none; }
+        .mp-nav-cart { display: flex; align-items: center; gap: 0.5rem; background: #000; color: #fff; padding: 0.5rem 1.1rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12rem; text-transform: uppercase; cursor: pointer; }
+        .mp-nav-cart-badge { background: #fff; color: #000; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; font-weight: 800; }
+        
+        .mp-hero-banner { margin-top: 64px; height: 52vh; min-height: 340px; background: #000; display: grid; grid-template-columns: 1fr 1fr 1fr; position: relative; overflow: hidden; }
+        .mp-hero-col { position: relative; overflow: hidden; border-right: 1px solid rgba(255,255,255,0.07); }
+        .mp-hero-col:last-child { border-right: none; }
+        .mp-hero-col-bg { position: absolute; inset: 0; transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .mp-hero-col-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem; background: linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 60%); }
+        .mp-hero-col-tag { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.25rem; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; }
+        .mp-hero-col-title { font-size: clamp(1.1rem,2.5vw,1.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; white-space: pre-line; }
+        .mp-hero-col-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.58rem; font-weight: 600; letter-spacing: 0.15rem; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,0.6); }
+
+        .mp-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2.5rem; border-bottom: 1px solid #ebebeb; background: #fff; position: sticky; top: 64px; z-index: 100; }
+        .mp-breadcrumbs { display: flex; align-items: center; gap: 0.6rem; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.08rem; color: #A9A9A9; }
+        .mp-breadcrumbs a { text-decoration: none; color: #A9A9A9; }
+        .mp-breadcrumbs strong { color: #000; font-weight: 600; }
+        .mp-toolbar-actions { display: flex; align-items: center; gap: 2rem; }
+        .mp-toolbar-count { font-size: 0.6rem; font-weight: 400; color: #A9A9A9; }
+        .mp-toolbar-filter-btn { display: none; align-items: center; gap: 0.4rem; padding: 0.55rem 1.1rem; border: 1px solid #000; background: #000; color: #fff; cursor: pointer; font-family: 'Montserrat',sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1rem; text-transform: uppercase; }
+        .mp-toolbar-sort { display: flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; font-weight: 500; color: #2a2a2a; }
+        .mp-toolbar-sort select { border: none; outline: none; background: transparent; font-family: 'Montserrat',sans-serif; font-size: 0.6rem; font-weight: 600; color: #000; cursor: pointer; appearance: none; padding-right: 1rem; }
+        .mp-toolbar-grid-toggles { display: flex; gap: 0.4rem; }
+        .mp-toolbar-grid-toggles button { width: 28px; height: 28px; border: 1px solid #ebebeb; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #A9A9A9; transition: all 0.2s; }
+        .mp-toolbar-grid-toggles button.active { border-color: #000; background: #000; color: #fff; }
+
+        .mp-sidebar { border-right: 1px solid #ebebeb; padding: 2.5rem 1.5rem; position: sticky; top: calc(64px + 51px); height: calc(100vh - 115px); overflow-y: auto; }
+        .mp-sidebar-mobile-header { display: none; align-items: center; justify-content: space-between; padding: 0 0 2rem; border-bottom: 1px solid #ebebeb; margin-bottom: 1.5rem; }
+        .mp-filter-section { padding: 0 0 2rem; border-bottom: 1px solid #ebebeb; margin-bottom: 1.5rem; }
+        .mp-filter-title { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2rem; text-transform: uppercase; color: #000; margin-bottom: 1.4rem; }
+        .mp-filter-options { display: flex; flex-direction: column; gap: 0.6rem; }
+        .mp-filter-label { display: flex; align-items: center; gap: 0.7rem; font-size: 0.68rem; color: #2a2a2a; cursor: pointer; }
+        .mp-filter-label input { width: 14px; height: 14px; appearance: none; border: 1px solid #D3D3D3; cursor: pointer; accent-color: #000; }
+        .mp-filter-label input:checked { background: #000; border-color: #000; }
+        .mp-price-inputs { display: flex; align-items: center; gap: 0.5rem; width: 100%; }
+        .mp-price-inputs input { flex: 1; min-width: 0; border: 1px solid #ebebeb; padding: 0.5rem 0.7rem; font-family: 'Montserrat',sans-serif; font-size: 0.65rem; color: #000; outline: none; background: transparent; }
+        .mp-price-inputs span { font-size: 0.6rem; color: #A9A9A9; flex-shrink: 0; }
+        .mp-clear-filters { display: block; width: 100%; padding: 0.7rem; border: 1px solid #ebebeb; background: transparent; cursor: pointer; font-family: 'Montserrat',sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15rem; text-transform: uppercase; color: #2a2a2a; text-align: center; }
+
+        .mp-main-content { padding: 2.5rem; overflow: hidden; }
+        .mp-pills { display: flex; overflow-x: auto; gap: 0.5rem; margin-bottom: 2.5rem; padding-bottom: 0.5rem; scrollbar-width: none; }
+        .mp-pills::-webkit-scrollbar { display: none; }
+        .mp-pill-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.1rem; border: 1px solid #ebebeb; border-radius: 2rem; background: transparent; cursor: pointer; font-family: 'Montserrat',sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1rem; text-transform: uppercase; color: #2a2a2a; white-space: nowrap; transition: all 0.25s; }
+        .mp-pill-btn.active { border-color: #000; background: #000; color: #fff; }
+
         .mp-layout-container {
           display: grid;
-          grid-template-columns: 240px 1fr;
+          grid-template-columns: 280px 1fr;
           min-height: 80vh;
+          width: 100%;
         }
 
         @media (max-width: 1100px) {
           .mp-products-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .mp-layout-container { grid-template-columns: 1fr; }
-          aside { display: none; }
-          .mp-products-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          main { padding: 1.5rem !important; }
+          .mp-sidebar { display: block; position: fixed; top: 0; left: -100%; width: 320px; height: 100vh; background: #fff; z-index: 9999; padding: 2rem; transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1); border-right: none; box-shadow: 2px 0 12px rgba(0,0,0,0.15); }
+          .mp-sidebar.open { left: 0; }
+          .mp-sidebar-mobile-header { display: flex; }
+          .mp-toolbar-filter-btn { display: flex; }
+          .mp-main-content { padding: 1.5rem !important; }
+        }
+        @media (max-width: 900px) {
+          .mp-nav-left { gap: 1rem; }
+          .mp-nav-search { display: none; }
+          .mp-hero-banner { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 1.5rem; margin-top: 64px; background: transparent; height: auto; }
+          .mp-hero-banner::-webkit-scrollbar { display: none; }
+          .mp-hero-col { flex: 0 0 85%; height: 50vh; min-height: 350px; scroll-snap-align: center; border-right: none; margin-left: 1rem; border-radius: 12px; overflow: hidden; }
+          .mp-hero-col:last-child { margin-right: 1rem; }
+        }
+        @media (max-width: 768px) {
+          .mp-products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem; }
+          .mp-nav { padding: 0 1rem; justify-content: space-between; }
+          .mp-nav-left { gap: 0; }
+          .mp-nav-home-text { display: none; }
+          .mp-nav-home svg { width: 22px !important; height: 22px !important; stroke-width: 2 !important; color: #000; }
+          .mp-nav-divider { display: none; }
+          .mp-nav-logo { display: none; }
+          .mp-toolbar { padding: 0 1rem 1rem; border-bottom: none; }
+          .mp-breadcrumbs { display: none; }
+          .mp-toolbar-actions { width: 100%; justify-content: space-between; gap: 0.5rem; }
+          .mp-toolbar-count { display: none; }
+          .mp-toolbar-grid-toggles { display: none; }
+          .mp-toolbar-filter-btn { flex: 1; justify-content: center; padding: 0.7rem; border-radius: 2rem; font-size: 0.55rem; }
+          .mp-toolbar-sort { flex: 1; justify-content: center; border: 1px solid #ebebeb; border-radius: 2rem; padding: 0.7rem; font-size: 0.55rem; }
+          .mp-toolbar-sort select { font-size: 0.55rem; width: 100%; text-align: center; text-align-last: center; }
         }
         @media (max-width: 480px) {
-          .mp-products-grid { grid-template-columns: 1fr !important; }
-          main { padding: 1rem !important; }
+          .mp-main-content { padding: 0 1rem 1rem !important; }
+          .mp-pills { margin-bottom: 1.5rem; }
+          .mp-product-img { aspect-ratio: 4/5; }
+          .mp-nav-account { font-size: 0; padding: 0; border: none; width: 38px; height: 38px; border-radius: 50%; justify-content: center; background: #f7f7f7; }
+          .mp-nav-account::after { content: '👤'; font-size: 1.2rem; }
+          .mp-nav-cart-text { display: none; }
+          .mp-nav-cart { padding: 0; width: 38px; height: 38px; border-radius: 50%; justify-content: center; }
+          .mp-hero-col { min-height: 300px; }
         }
       `}</style>
     </>

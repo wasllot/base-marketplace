@@ -5,25 +5,40 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const navItems = [
-  { href: '/admin/contenido',  label: 'Contenido del Sitio', icon: '✦', group: 'CMS' },
-  { href: '/admin/catalogo',   label: 'Catálogo',            icon: '▦', group: 'API' },
-  { href: '/admin/categorias', label: 'Categorías',          icon: '◈', group: 'API' },
-  { href: '/admin/pedidos',    label: 'Pedidos',             icon: '◎', group: 'API' },
-  { href: '/admin/tiendas',    label: 'Tiendas',             icon: '◇', group: 'API' },
-  { href: '/admin/productos',  label: 'Productos (Local)',   icon: '◆', group: 'LOCAL' },
+  { href: '/admin/contenido',  label: 'Contenido del Sitio', icon: '✦', group: 'CMS', roles: ['admin'] },
+  { href: '/admin/mi-tienda',  label: 'Mi Tienda',           icon: '🏪', group: 'SELLER', roles: ['seller'] },
+  { href: '/admin/catalogo',   label: 'Catálogo',            icon: '▦', group: 'API', roles: ['admin', 'seller'] },
+  { href: '/admin/categorias', label: 'Categorías',          icon: '◈', group: 'API', roles: ['admin'] },
+  { href: '/admin/pedidos',    label: 'Pedidos',             icon: '◎', group: 'API', roles: ['admin', 'seller'] },
+  { href: '/admin/tiendas',    label: 'Tiendas',             icon: '🏢', group: 'API', roles: ['admin'] },
+  { href: '/admin/productos',  label: 'Productos (Local)',   icon: '◆', group: 'LOCAL', roles: ['admin'] },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [authed, setAuthed] = useState<boolean | null>(null);
+  const [role, setRole] = useState<'admin' | 'seller'>('seller');
+  const [userName, setUserName] = useState<string>('Vendedor');
 
   useEffect(() => {
     const ok = localStorage.getItem('base_admin_auth') === 'true';
+    const r = (localStorage.getItem('base_user_role') as 'admin' | 'seller') || 'seller';
+    const n = localStorage.getItem('base_user_name') || 'Usuario';
+    
     if (!ok && pathname !== '/admin') {
       router.replace('/admin');
     } else {
       setAuthed(ok || pathname === '/admin');
+      setRole(r);
+      setUserName(n);
+
+      if (ok && pathname !== '/admin') {
+        const allowedRoute = navItems.find(i => pathname.startsWith(i.href));
+        if (allowedRoute && !allowedRoute.roles.includes(r)) {
+          router.replace(r === 'admin' ? '/admin/tiendas' : '/admin/catalogo');
+        }
+      }
     }
   }, [pathname, router]);
 
@@ -206,9 +221,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           <nav className="admin-nav">
-            {(['CMS', 'API', 'LOCAL'] as const).map(group => {
-              const items = navItems.filter(i => i.group === group);
-              const labels: Record<string, string> = { CMS: 'Contenido', API: 'API · Marketplace', LOCAL: 'Local' };
+            {(['CMS', 'API', 'LOCAL', 'SELLER'] as const).map(group => {
+              const items = navItems.filter(i => i.group === group && i.roles.includes(role));
+              if (items.length === 0) return null;
+              const labels: Record<string, string> = { CMS: 'Contenido', API: 'API · Marketplace', LOCAL: 'Local', SELLER: 'Tu Tienda' };
               return (
                 <div key={group}>
                   <div className="admin-nav-label">{labels[group]}</div>
@@ -232,8 +248,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <button
               className="admin-logout-btn"
               onClick={() => {
-                localStorage.removeItem('base_admin_auth');
-                router.replace('/admin');
+                const wasAdminImpersonating = !!localStorage.getItem('base_admin_token_backup');
+                if (wasAdminImpersonating) {
+                  // Revert to admin token
+                  const adminToken = localStorage.getItem('base_admin_token_backup');
+                  localStorage.setItem('base_api_token', adminToken!);
+                  localStorage.setItem('base_user_role', 'admin');
+                  localStorage.removeItem('base_admin_token_backup');
+                  router.replace('/admin/tiendas');
+                } else {
+                  localStorage.removeItem('base_admin_auth');
+                  localStorage.removeItem('base_api_token');
+                  localStorage.removeItem('base_user_role');
+                  router.replace('/admin');
+                }
               }}
             >
               Cerrar sesión
@@ -247,7 +275,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               {navItems.find(i => pathname.startsWith(i.href))?.label ?? 'Admin'}
             </span>
             <div className="admin-topbar-right">
-              <span>BASE Admin</span>
+              <span style={{ textTransform: 'uppercase', fontWeight: 600, letterSpacing: '.05em' }}>{role}</span>
+              <span style={{ color: '#000', fontWeight: 500 }}>{userName}</span>
             </div>
           </div>
           <div className="admin-content">
